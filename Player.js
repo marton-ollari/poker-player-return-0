@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '3.7';
+    return '3.9';
   }
 
   static betRequest(gameState, bet) {
@@ -27,7 +27,7 @@ class Player {
       } else {
         bet(max);
       }
-    } else if (Player.getOutPlayers(gameState) <= 3) {
+    } else if (Player.getOutPlayers(gameState) <= 2) {
       bet(0);
 
     }else if(community_cards !== undefined || community_cards.length !==0){
