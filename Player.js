@@ -8,27 +8,25 @@ class Player {
 
     var card1 = gameState.players[in_action].hole_cards[0];
     var card2 = gameState.players[in_action].hole_cards[1];
+    var max = Player.getMaxBet(gameState);
 
     card1 = Player.cardRankValue(card1);
     card2 = Player.cardRankValue(card2);
 
+    var all_in = gameState.players[in_action].stack;
+    if(Player.getMaxBet(gameState, in_action)){
+      bet(all_in);
+    } else if(card1.rank === card2.rank || card1.suit === card2.suit){
+      bet(max);
 
-    var max_our_Money = gameState.players[in_action].stack;
-    if(card1.rank == card2.rank){
-      bet(max_our_Money);
     } else if (gameState.orbits = 0) {
-      //bet(parseint(max_our_Money));
+      //bet(parseint(all_in));
       bet(0);
+
     } else if (parseInt(card1.rank + card2.rank) < 16) {
       bet(0);
+
     } else {
-      var max = 0;
-      for (var i = 0; i < gameState.players.length; i++) {
-        if (gameState.players[i].bet > max) {
-          max = gameState.players[i].bet;
-        }
-      }
-      max += gameState.minimum_raise;
       console.log("-----------------------------------------");
       console.log(max);
       console.log("-----------------------------------------");
@@ -38,6 +36,26 @@ class Player {
 
 
   static showdown(gameState) {
+  }
+
+  static getMaxBet(gameState){
+    var max = 0;
+    for (var i = 0; i < gameState.players.length; i++) {
+      if (gameState.players[i].bet > max) {
+        max = gameState.players[i].bet;
+      }
+    }
+    max += gameState.minimum_raise;
+    return max;
+  }
+
+  static getMaxStack(gameState, in_action){
+    for (var i = 0; i < gameState.players.length; i++) {
+      if (gameState.players[i].stack > gameState.players[in_action].stack) {
+        return false;
+      }
+    }
+    return true;
   }
 
   static cardRankValue(card) {
