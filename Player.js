@@ -21,18 +21,20 @@ class Player {
 
 
 
-    if(parseInt(card1.rank + card2.rank) > 22 || card1.rank === card2.rank){
-      if(max<200){
+    if(parseInt(card1.rank + card2.rank) > 22 || card1.rank === card2.rank) {
+      if (max < 200) {
         bet(100);
-      }else if(max<500){
+      } else if (max < 500) {
         bet(200)
-      }else{
+      } else {
         bet(max);
       }
-
-   } else if (Player.getOutPlayers(gameState)<=3) {
+    } else if (Player.getOutPlayers(gameState)<=3) {
       bet(0);
 
+    }else if(community_cards !== undefined || community_cards.length !==0){
+      bet(parseInt(Player.hasPairs(community_cards, card1)+Player.hasPairs(community_cards, card2)));
+      
     }else if(Player.getMaxStack(gameState, in_action)){
       bet(max);
 
@@ -95,8 +97,14 @@ class Player {
       return community_cards;
   }
 
-  static hasPairs(gameState, community_cards){
-      
+  static hasPairs(community_cards, card1){
+    var bet =0;
+      for(var i=0;i<community_cards.length;i++){
+        if(community_cards[i].rank === card1.rank){
+          bet+=card1.rank*10;
+        }
+      }
+    return bet;
   }
 
   static cardRankValue(card) {
