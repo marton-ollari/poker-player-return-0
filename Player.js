@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '3.0';
+    return '3.1';
   }
 
   static betRequest(gameState, bet) {
@@ -17,7 +17,11 @@ class Player {
     var all_in = gameState.players[in_action].stack;
 
     if(parseInt(card1.rank + card2.rank) > 22){
-      bet(max);
+      if(max<200){
+        bet(200)
+      }else{
+        bet(max);
+      }
    } else if (Player.getActivePlayers(gameState)>2) {
       bet(0);
     }else if(Player.getMaxStack(gameState, in_action)){
