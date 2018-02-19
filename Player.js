@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '3.6';
+    return '3.7';
   }
 
   static betRequest(gameState, bet) {
@@ -32,8 +32,15 @@ class Player {
 
     }else if(community_cards !== undefined || community_cards.length !==0){
 
-      bet(parseInt(Player.hasPairs(community_cards, card1)+Player.hasPairs(community_cards, card2)));
-
+      let pair_bet =parseInt(Player.hasPairs(community_cards, card1)+Player.hasPairs(community_cards, card2));
+      if(pair_bet>0){
+        let drill_bet=Player.hasThreeOfAKind(community_cards, card1, card2);
+        if(drill_bet>0){
+          bet(drill_bet);
+        }else{
+          bet(pair_bet)
+        }
+      }
     }else if(Player.getMaxStack(gameState, in_action)){
       bet(max);
 
