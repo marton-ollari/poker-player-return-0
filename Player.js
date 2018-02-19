@@ -16,12 +16,10 @@ class Player {
 
     var all_in = gameState.players[in_action].stack;
 
-    var community_cards= Player.changeCommunityCards(gameState, gameState.community_cards);
+    var community_cards = Player.changeCommunityCards(gameState, gameState.community_cards);
 
 
-
-
-    if(parseInt(card1.rank + card2.rank) > 22 || card1.rank === card2.rank) {
+    if (parseInt(card1.rank + card2.rank) > 22 || card1.rank === card2.rank) {
       if (max < 200) {
         bet(100);
       } else if (max < 500) {
@@ -29,13 +27,13 @@ class Player {
       } else {
         bet(max);
       }
-    } else if (Player.getOutPlayers(gameState)<=3) {
+    } else if (Player.getOutPlayers(gameState) <= 3) {
       bet(0);
 
-    }else if(community_cards !== undefined || community_cards.length !==0){
-      bet(parseInt(Player.hasPairs(community_cards, card1)+Player.hasPairs(community_cards, card2)));
-      
-    }else if(Player.getMaxStack(gameState, in_action)){
+    } else if (community_cards !== undefined || community_cards.length !== 0) {
+      bet(parseInt(Player.hasPairs(community_cards, card1) + Player.hasPairs(community_cards, card2)));
+
+    } else if (Player.getMaxStack(gameState, in_action)) {
       bet(max);
 
     } else if (parseInt(card1.rank + card2.rank) < 16) {
@@ -50,7 +48,7 @@ class Player {
   static showdown(gameState) {
   }
 
-  static getMaxBet(gameState){
+  static getMaxBet(gameState) {
     var max = 0;
     for (var i = 0; i < gameState.players.length; i++) {
       if (gameState.players[i].bet > max) {
@@ -61,7 +59,7 @@ class Player {
     return max;
   }
 
-  static getMaxStack(gameState, in_action){
+  static getMaxStack(gameState, in_action) {
     for (var i = 0; i < gameState.players.length; i++) {
       if (gameState.players[i].stack >= gameState.players[in_action].stack) {
         return false;
@@ -70,16 +68,17 @@ class Player {
     return true;
   }
 
-  static getOutPlayers(gameState){
-    var num=0;
+  static getOutPlayers(gameState) {
+    var num = 0;
     for (var i = 0; i < gameState.players.length; i++) {
       if (gameState.players[i].status === "out") {
-        num+=1;
+        num += 1;
       }
     }
     return num;
   }
-  static getHoldValue(gameState){
+
+  static getHoldValue(gameState) {
     var hold = 0;
     for (var i = 0; i < gameState.players.length; i++) {
       if (gameState.players[i].bet > hold) {
@@ -90,20 +89,40 @@ class Player {
   }
 
 
-  static changeCommunityCards(gameState, community_cards){
-      for(var i=0; i<community_cards.length;i++){
-          community_cards[i] = Player.cardRankValue(community_cards[i])
-      }
-      return community_cards;
+  static changeCommunityCards(gameState, community_cards) {
+    for (var i = 0; i < community_cards.length; i++) {
+      community_cards[i] = Player.cardRankValue(community_cards[i])
+    }
+    return community_cards;
   }
 
-  static hasPairs(community_cards, card1){
-    var bet =0;
-      for(var i=0;i<community_cards.length;i++){
-        if(community_cards[i].rank === card1.rank){
-          bet+=card1.rank*10;
+  static hasPairs(community_cards, card1) {
+    var bet = 0;
+    for (var i = 0; i < community_cards.length; i++) {
+      if (community_cards[i].rank === card1.rank) {
+        bet += card1.rank * 10;
+      }
+    }
+    return bet;
+  }
+
+  static hasThreeOfAKind(community_cards, card1, card2) {
+    let cards = [];
+    cards.push.apply(cards, community_cards);
+    cards.push(card1, card2);
+    let bet = 0;
+    for (let i = 0; i < cards.length; i++) {
+      for (let j = 0; j < cards.length; j++) {
+        let num = 0;
+        if (cards.i === cards.j) {
+          num++;
         }
       }
+      if (num === 2) {
+        bet += card1.rank * 50;
+        return bet;
+      }
+    }
     return bet;
   }
 
