@@ -14,8 +14,9 @@ class Player {
 
 
     var max_our_Money = gameState.players[in_action].stack;
-
-    if (gameState.orbits = 0) {
+    if(card1.rank == card2.rank){
+      bet(max_our_Money);
+    } else if (gameState.orbits = 0) {
       //bet(parseint(max_our_Money));
       bet(0);
     } else if (parseInt(card1.rank + card2.rank) < 16) {
