@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '3.5';
+    return '3.6';
   }
 
   static betRequest(gameState, bet) {
@@ -33,8 +33,9 @@ class Player {
       bet(0);
 
     }else if(community_cards !== undefined || community_cards.length !==0){
+
       bet(parseInt(Player.hasPairs(community_cards, card1)+Player.hasPairs(community_cards, card2)));
-      
+
     }else if(Player.getMaxStack(gameState, in_action)){
       bet(max);
 
@@ -90,7 +91,7 @@ class Player {
   }
 
 
-  static changeCommunityCards(gameState, community_cards){
+  static changeCommunityCards(community_cards){
       for(var i=0; i<community_cards.length;i++){
           community_cards[i] = Player.cardRankValue(community_cards[i])
       }
@@ -98,12 +99,14 @@ class Player {
   }
 
   static hasPairs(community_cards, card1){
+
     var bet =0;
       for(var i=0;i<community_cards.length;i++){
         if(community_cards[i].rank === card1.rank){
           bet+=card1.rank*10;
         }
       }
+
     return bet;
   }
 
