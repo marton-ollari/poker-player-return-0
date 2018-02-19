@@ -27,8 +27,6 @@ class Player {
       } else {
         bet(max);
       }
-    } else if (Player.getOutPlayers(gameState) <= 2) {
-      bet(0);
 
     }else if(community_cards !== undefined || community_cards.length !==0){
 
@@ -41,6 +39,9 @@ class Player {
           bet(pair_bet)
         }
       }
+    } else if (Player.getOutPlayers(gameState) <= 2) {
+      bet(0);
+
     }else if(Player.getMaxStack(gameState, in_action)){
       bet(max);
 
