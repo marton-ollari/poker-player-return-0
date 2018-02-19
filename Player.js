@@ -80,6 +80,7 @@ class Player {
     }
     return num;
   }
+
   static getHoldValue(gameState){
     var hold = 0;
     for (var i = 0; i < gameState.players.length; i++) {
@@ -98,12 +99,12 @@ class Player {
       return community_cards;
   }
 
-  static hasPairs(community_cards, card1){
+  static hasPairs(community_cards, card){
 
     var bet =0;
       for(var i=0;i<community_cards.length;i++){
-        if(community_cards[i].rank === card1.rank){
-          bet+=card1.rank*10;
+        if(community_cards[i].rank === card.rank){
+          bet+=card.rank*10;
         }
       }
 
