@@ -18,6 +18,8 @@ class Player {
 
     if(parseInt(card1.rank + card2.rank) > 22){
       if(max<200){
+        bet(100);
+      }else if(max<500){
         bet(200)
       }else{
         bet(max);
