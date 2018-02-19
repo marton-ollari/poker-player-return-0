@@ -30,17 +30,6 @@ class Player {
     } else if (Player.getOutPlayers(gameState) <= 3) {
       bet(0);
 
-    }else if(community_cards !== undefined || community_cards.length !==0){
-
-      let pair_bet =parseInt(Player.hasPairs(community_cards, card1)+Player.hasPairs(community_cards, card2));
-      if(pair_bet>0){
-        let drill_bet=Player.hasThreeOfAKind(community_cards, card1, card2);
-        if(drill_bet>0){
-          bet(drill_bet);
-        }else{
-          bet(pair_bet)
-        }
-      }
     }else if(Player.getMaxStack(gameState, in_action)){
       bet(max);
 
