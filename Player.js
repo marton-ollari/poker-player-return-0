@@ -19,7 +19,10 @@ class Player {
     var community_cards = Player.changeCommunityCards(gameState, gameState.community_cards);
 
 
-    if (parseInt(card1.rank + card2.rank) > 22 || card1.rank === card2.rank) {
+    if (Player.getOutPlayers(gameState) <= 3) {
+      bet(0);
+
+    } else if (parseInt(card1.rank + card2.rank) > 22 || card1.rank === card2.rank) {
       if (max < 200) {
         bet(100);
       } else if (max < 500) {
@@ -27,10 +30,7 @@ class Player {
       } else {
         bet(max);
       }
-    } else if (Player.getOutPlayers(gameState) <= 3) {
-      bet(0);
-
-    }else if(community_cards !== undefined || community_cards.length !==0){
+    } else if(community_cards !== undefined || community_cards.length !==0){
 
       let pair_bet =parseInt(Player.hasPairs(community_cards, card1)+Player.hasPairs(community_cards, card2));
       if(pair_bet>0){
@@ -98,7 +98,7 @@ class Player {
   }
 
 
-  static changeCommunityCards(gameState, community_cards) {
+  static changeCommunityCards(community_cards) {
     for (var i = 0; i < community_cards.length; i++) {
       community_cards[i] = Player.cardRankValue(community_cards[i])
     }
