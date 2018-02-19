@@ -4,16 +4,22 @@ class Player {
   }
 
   static betRequest(gameState, bet) {
-    var max=0;
-    for (var i=0; i<gameState.players.length;i++){
-      if(gameState.players[i].bet>max){
-        max = gameState.players[i].bet;
+
+    if (gameState.orbits = 0) {
+      bet(1000);
+    } else {
+      var max = 0;
+      for (var i = 0; i < gameState.players.length; i++) {
+        if (gameState.players[i].bet > max) {
+          max = gameState.players[i].bet;
+        }
       }
+      max += gameState.minimum_raise;
+      console.log("-----------------------------------------");
+      console.log(max);
+      console.log("-----------------------------------------");
+      bet(max);
     }
-    max+=gameState.minimum_raise;
-    console.log("-----------------------------------------")
-    console.log(max);
-    bet(max);
   }
 
   static showdown(gameState) {
