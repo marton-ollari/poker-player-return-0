@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return 'get on our level n00bs';
+    return '2.5';
   }
 
   static betRequest(gameState, bet) {
@@ -14,15 +14,11 @@ class Player {
     card2 = Player.cardRankValue(card2);
 
     var all_in = gameState.players[in_action].stack;
+
     if(Player.getMaxStack(gameState, in_action)){
       bet(all_in);
     } else if(card1.rank === card2.rank || card1.suit === card2.suit){
       bet(max);
-
-    } else if (gameState.orbits = 0) {
-      //bet(parseint(all_in));
-      bet(0);
-
     } else if (parseInt(card1.rank + card2.rank) < 16) {
       bet(0);
 
@@ -51,7 +47,7 @@ class Player {
 
   static getMaxStack(gameState, in_action){
     for (var i = 0; i < gameState.players.length; i++) {
-      if (gameState.players[i].stack > gameState.players[in_action].stack) {
+      if (gameState.players[i].stack >= gameState.players[in_action].stack) {
         return false;
       }
     }
