@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '3.7';
+    return '3.8';
   }
 
   static betRequest(gameState, bet) {
@@ -19,7 +19,7 @@ class Player {
     var community_cards = Player.changeCommunityCards(gameState, gameState.community_cards);
 
 
-    if (Player.getOutPlayers(gameState) <= 3) {
+    if (Player.getOutPlayers(gameState) <= 2) {
       bet(0);
 
     } else if (parseInt(card1.rank + card2.rank) > 22 || card1.rank === card2.rank) {
@@ -30,6 +30,7 @@ class Player {
       } else {
         bet(max);
       }
+
     } else if(community_cards !== undefined || community_cards.length !==0){
 
       let pair_bet =parseInt(Player.hasPairs(community_cards, card1)+Player.hasPairs(community_cards, card2));
