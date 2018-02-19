@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '2.9';
+    return '3.0';
   }
 
   static betRequest(gameState, bet) {
@@ -9,6 +9,7 @@ class Player {
     var card1 = gameState.players[in_action].hole_cards[0];
     var card2 = gameState.players[in_action].hole_cards[1];
     var max = Player.getMaxBet(gameState);
+    var hold = Player.getHoldValue(gameState);
 
     card1 = Player.cardRankValue(card1);
     card2 = Player.cardRankValue(card2);
@@ -27,10 +28,7 @@ class Player {
       bet(0);
 
     } else {
-      console.log("-----------------------------------------");
-      console.log(max);
-      console.log("-----------------------------------------");
-      bet(max);
+      bet(hold);
     }
   }
 
@@ -66,6 +64,15 @@ class Player {
       }
     }
     return num;
+  }
+  static getHoldValue(gameState){
+    var hold = 0;
+    for (var i = 0; i < gameState.players.length; i++) {
+      if (gameState.players[i].bet > hold) {
+        hold = gameState.players[i].bet;
+      }
+    }
+    return hold;
   }
 
   static cardRankValue(card) {
