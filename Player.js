@@ -27,7 +27,7 @@ class Player {
       } else {
         bet(max);
       }
-    } else if (Player.getOutPlayers(gameState) <= 2) {
+    } else if (Player.getOutPlayers(gameState) <= 3) {
       bet(0);
 
     }else if(community_cards !== undefined || community_cards.length !==0){
