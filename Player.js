@@ -8,7 +8,7 @@ class Player {
     for (var i=0; i<gameState.players.length;i++){
       ChipList.push(gameState.players[i].stack);
     }
-    console.log(ChipList);
+    console.log("szöveg"+ChipList);
     bet(1000);
   }
 
