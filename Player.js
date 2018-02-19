@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '2.6';
+    return '2.7';
   }
 
   static betRequest(gameState, bet) {
@@ -15,7 +15,9 @@ class Player {
 
     var all_in = gameState.players[in_action].stack;
 
-    if(Player.getMaxStack(gameState, in_action)){
+    if (Player.getActivePlayers(gameState)>3) {
+      bet(0);
+    }else if(Player.getMaxStack(gameState, in_action)){
       bet(max);
     } else if(card1.rank === card2.rank || card1.suit === card2.suit){
       bet(max);
@@ -52,6 +54,16 @@ class Player {
       }
     }
     return true;
+  }
+
+  static getActivePlayers(gameState){
+    var num=0;
+    for (var i = 0; i < gameState.players.length; i++) {
+      if (gameState.players[i].status === "active") {
+        num+=1;
+      }
+    }
+    return num;
   }
 
   static cardRankValue(card) {
