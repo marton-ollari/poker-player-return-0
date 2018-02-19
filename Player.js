@@ -5,8 +5,11 @@ class Player {
 
   static betRequest(gameState, bet) {
 
+    var in_action = gameState.in_action;
+    var max_our_Money= gameState.players.in_action.stack;
+
     if (gameState.orbits = 0) {
-      bet(1000);
+      bet(max_our_Money);
     } else {
       var max = 0;
       for (var i = 0; i < gameState.players.length; i++) {
