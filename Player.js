@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '3.1';
+    return '3.3';
   }
 
   static betRequest(gameState, bet) {
@@ -24,7 +24,7 @@ class Player {
       }else{
         bet(max);
       }
-   } else if (Player.getActivePlayers(gameState)>2) {
+   } else if (Player.getOutPlayers(gameState)<=3) {
       bet(0);
     }else if(Player.getMaxStack(gameState, in_action)){
       bet(max);
@@ -62,10 +62,10 @@ class Player {
     return true;
   }
 
-  static getActivePlayers(gameState){
+  static getOutPlayers(gameState){
     var num=0;
     for (var i = 0; i < gameState.players.length; i++) {
-      if (gameState.players[i].status === "active") {
+      if (gameState.players[i].status === "out") {
         num+=1;
       }
     }
