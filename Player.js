@@ -4,12 +4,16 @@ class Player {
   }
 
   static betRequest(gameState, bet) {
-    var ChipList = [];
+    var max=0;
     for (var i=0; i<gameState.players.length;i++){
-      ChipList.push(gameState.players[i].stack);
+      if(gameState.players[i].bet>max){
+        max = gameState.players[i].bet;
+      }
     }
-    console.log("szöveg"+ChipList);
-    bet(1000);
+    max+=gameState.minimum_raise;
+    console.log("-----------------------------------------")
+    console.log(max);
+    bet(max);
   }
 
   static showdown(gameState) {
